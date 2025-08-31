@@ -2,6 +2,8 @@
 
 # Email Classifier
 
+![image](./images/image.png)
+
 ## Problem
 
 I had to classify a lot of emails from different accounts, and doing it by hand took enormous time and mental bandwidth.
