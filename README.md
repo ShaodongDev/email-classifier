@@ -20,9 +20,7 @@ This would let me later analyze trends without wasting hours labeling manually.
 ### Why Subjects Instead of Content?
 
 - Content may hold sensitive information I don’t want to expose.  
-
 - Subjects are concise but usually carry enough signal in this case.  
-
 - Faster training and easier preprocessing.
 
 ## Solution
@@ -63,32 +61,25 @@ The workflow is split into **three main steps**, each handling one stage of the 
 
 1. **ETL Pipeline (`clean_update.py`)**  
 
-- Reads subjects from a CSV.  
-
-- Cleans the data (removes `FW:`, `RE:`, dates, IDs, codes).  
-
-- Write the cleaned datainto a local SQLite database.  
+   - Reads subjects from a CSV.  
+   - Cleans the data (removes `FW:`, `RE:`, dates, IDs, codes).  
+   - Write the cleaned datainto a local SQLite database.  
 
 2. **Model Training (`train_model.py`)**  
 
-- Reads clean data from SQLite.  
-
-- Transforms subject text into numerical features using **TF-IDF vectorization**.  
-
-- Trains a **MultiOutput Random Forest classifier** on those features to predict **both labels at once**.  
-
-- Evaluates performance and saves both the vectorizer and the model for reuse.
+   - Reads clean data from SQLite.  
+   - Transforms subject text into numerical features using **TF-IDF vectorization**.  
+   - Trains a **MultiOutput Random Forest classifier** on those features to predict **both labels at once**.  
+   - Evaluates performance and saves both the vectorizer and the model for reuse.
 
 3. **Prediction (`predict.py`)** 
 
-- In this demo I show **OCR from a screen region** to prove the end-to-end flow:
-  - Take a screenshot of an email subject.  
-  -  Extract text with OCR.  
-  - Apply the saved TF-IDF vectorizer + classifier to predict labels.  
+   - In this demo I show **OCR from a screen region** to prove the end-to-end flow:
+     - Take a screenshot of an email subject.  
+     -  Extract text with OCR.  
+     - Apply the saved TF-IDF vectorizer + classifier to predict labels.  
 
 >  OCR is just an example input. The model works with any text source. You can batch-predict from files, loop over a folder, pull from a database, or even crawl the web as long as giving it subject strings.
-
-So:
 
 ```
 CSV → ETL Pipeline → SQLite → Training → Save Model + Vectorizer → OCR/Input → Predict
