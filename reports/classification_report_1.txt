@@ -1,0 +1,31 @@
+2025-08-31T11:39:37
+Main Category report:
+                precision    recall  f1-score   support
+
+Administration       0.50      0.33      0.40         3
+    Admissions       0.67      1.00      0.80         2
+       Courses       0.00      0.00      0.00         1
+
+      accuracy                           0.50         6
+     macro avg       0.39      0.44      0.40         6
+  weighted avg       0.47      0.50      0.47         6
+
+
+Sub Category report:
+                    precision    recall  f1-score   support
+
+            Appeal       0.00      0.00      0.00       1.0
+Application Status       0.00      0.00      0.00       0.0
+     Course Change       0.00      0.00      0.00       0.0
+       Fee Payment       0.00      0.00      0.00       1.0
+    Lab Scheduling       0.00      0.00      0.00       1.0
+       Maintenance       0.00      0.00      0.00       1.0
+          Meetings       0.00      0.00      0.00       1.0
+      Offer Letter       0.00      0.00      0.00       0.0
+    Policy Updates       0.00      0.00      0.00       1.0
+            Safety       0.00      0.00      0.00       0.0
+          Training       0.00      0.00      0.00       0.0
+
+          accuracy                           0.00       6.0
+         macro avg       0.00      0.00      0.00       6.0
+      weighted avg       0.00      0.00      0.00       6.0

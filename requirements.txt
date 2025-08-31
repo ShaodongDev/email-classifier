@@ -1,0 +1,8 @@
+joblib==1.4.2
+jupyter==1.0.0
+numpy~=1.26.0
+pandas~=2.2.0
+pillow==10.3.0
+pyautogui==0.9.54
+pytesseract==0.3.10
+scikit-learn~=1.5.0
