@@ -11,9 +11,9 @@ import joblib
 from typing import Optional
 
 def train_and_evaluate(
-    db_path: str = "dataset.db",
+    db_path: str = "db/dataset.db",
     table: str = "emails",
-    report_file: Optional[str] = "classification_report.txt",
+    report_file: Optional[str] = "reports/classification_report.txt",
     model_type: str = "rf",   # "rf" = Random Forest, "logreg" = Logistic Regression
     test_size: float = 0.15,
     random_state: Optional[int] = None,

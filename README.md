@@ -31,30 +31,36 @@ I already had a small set of labeled data, so I decided to build a **semi-superv
 - Use the model to predict labels for new incoming emails.  
 - Add back the **most confident predictions** into the training dataset and retrain in iterations.  
 
-For the classifier, I used a **Random Forest** because:
+For the classifier, I support two options:  
 
-- It handles text features from TF-IDF reliably without needing heavy tuning.
-- It works well with small to medium-sized datasets.
-- It’s naturally robust to noise and overfitting.
+- **Random Forest**  
+  - Handles TF-IDF text features reliably without heavy tuning.  
+  - Works well with small to medium-sized datasets.  
+  - Naturally robust to noise and overfitting.  
 
-This way the model improves over time, while I spend less time labeling.
+- **Logistic Regression**  
+  - A lighter, faster linear model.  
+  - Often competitive for text classification when features are high-dimensional.  
+  - Good baseline for comparison.  
+
+In practice, Random Forest has been my go-to for stability, while Logistic Regression serves as a simpler, faster alternative.
 
 ## Workflow
 
 ```mermaid
 flowchart LR
-    A[📄 CSV data source] --> B[⚙️ ETL]
-    B --> C[(🗄 SQLite DB)]
-    C --> D[🤖 Train Supervised Model]
-    D --> E[💾 Save Models]
-    E --> F[🔍 Predict]
+    A[Data source] --> B[ETL]
+    B --> C[(SQLite DB)]
+    C --> D[Train Supervised Model (RF/LogReg)]
+    D --> E[Save Models]
+    E --> F[Predict]
     
-    F --> G[✨ High-confidence predictions]
-    G --> H[🔄 Add back to Training Data]
+    F --> G[High-confidence predictions]
+    G --> H[Add back to Training Data]
     H --> |Semi-supervised loop| C
 
-    F -->|Demo: OCR| I[🖼 Screenshot → OCR → Subject]
-    F -->|Alt: Batch| J[📂 CSV / DB / API]
+    F -->|Demo: OCR| I[Screenshot → OCR → Subject]
+    F -->|Alt: Batch| J[CSV / DB / API]
 ```
 
 The workflow is split into **three main steps**, each handling one stage of the process:  
@@ -68,9 +74,11 @@ The workflow is split into **three main steps**, each handling one stage of the 
 2. **Model Training (`train_model.py`)**  
 
    - Reads clean data from SQLite.  
-   - Transforms subject text into numerical features using **TF-IDF vectorization**.  
-   - Trains a **MultiOutput Random Forest classifier** on those features to predict **both labels at once**.  
-   - Evaluates performance and saves both the vectorizer and the model for reuse.
+   - Performs **feature engineering** on the subject text with **TF-IDF vectorization**.
+   - Trains a **multi-output classifier** to predict **both labels at once** (two options):
+     - **Random Forest** (`model_type="rf"`): robust, low-tuning, good on small/medium data.
+     - **Logistic Regression** (`model_type="logreg"`): fast, strong baseline for high-dimensional TF-IDF.
+   - Evaluates performance and saves the **vectorizer** and the **model** for reuse.
 
 3. **Prediction (`predict.py`)** 
 
@@ -128,6 +136,7 @@ from train_model import train_and_evaluate
 train_and_evaluate(db_path='db/dataset.db',
                    table= 'emails',
                    report_file='reports/classification_report_1.txt',
+                   model_type= 'rf'      # or 'logreg' for Logistic Regression
                    test_size= 0.2,
                    random_state= None)
 ```
@@ -151,6 +160,7 @@ subject_text, main, sub = ocr_predict(region, vec, model, debug=True)
 ## Example Output
 
 ```
+Model Type: rf
 OCR Subject: Annual Budget Meeting Rescheduled
 Predicted → Main: Administration | Sub: Budget
 ```
