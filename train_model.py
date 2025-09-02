@@ -80,7 +80,7 @@ def train_and_evaluate(
         now = datetime.now().isoformat(timespec="seconds")
         with open(report_file, "w", encoding="utf-8") as f:
             f.write(now + "\n")
-            f.write("Model Type:", model_type + "\n")
+            f.write("Model Type:" + model_type + "\n")
             f.write("Main Category report:\n")
             f.write(report_main + "\n\n")
             f.write("Sub Category report:\n")
