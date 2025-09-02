@@ -75,7 +75,7 @@ The workflow is split into **three main steps**, each handling one stage of the 
 
    - Reads clean data from SQLite.  
    - Performs **feature engineering** on the subject text with **TF-IDF vectorization**.
-   - Trains a **multi-output classifier** to predict **both labels at once** (two options):
+   - Trains a multi-output classifier to predict both labels at once (two options):
      - **Random Forest** (`model_type="rf"`): robust, low-tuning, good on small/medium data.
      - **Logistic Regression** (`model_type="logreg"`): fast, strong baseline for high-dimensional TF-IDF.
    - Evaluates performance and saves the **vectorizer** and the **model** for reuse.
