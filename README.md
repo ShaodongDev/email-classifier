@@ -51,7 +51,7 @@ In practice, Random Forest has been my go-to for stability, while Logistic Regre
 flowchart LR
     A[Data source] --> B[ETL]
     B --> C[(SQLite DB)]
-    C --> D[Train Supervised Model (RF/LogReg)]
+    C --> D[Train Supervised Model]
     D --> E[Save Models]
     E --> F[Predict]
     
