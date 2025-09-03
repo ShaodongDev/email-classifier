@@ -69,11 +69,11 @@ The workflow is split into **three main steps**, each handling one stage of the 
 
    - Reads subjects from a CSV.  
    - Cleans the data (removes `FW:`, `RE:`, dates, IDs, codes).  
-   - Write the cleaned datainto a local SQLite database. 
+   - Writes the cleaned datainto a local SQLite database. 
 
 > I used SQLite here only for convenience and easy demo portability.The project is not limited to SQLite,and it can connect to any relational or cloud database (PostgreSQL, Azure SQL, AWS RDS, etc.)
 
-1. **Model Training (`train_model.py`)**  
+2. **Model Training (`train_model.py`)**  
 
    - Reads clean data from SQLite.  
    - Performs **feature engineering** on the subject text with **TF-IDF vectorization**.
@@ -82,7 +82,7 @@ The workflow is split into **three main steps**, each handling one stage of the 
      - **Logistic Regression** (`model_type="logreg"`): fast, strong baseline for high-dimensional TF-IDF.
    - Evaluates performance and saves the **vectorizer** and the **model** for reuse.
 
-2. **Prediction (`predict.py`)** 
+3. **Prediction (`predict.py`)** 
 
    - In this demo I show **OCR from a screen region** to prove the end-to-end flow:
      - Take a screenshot of an email subject.  
