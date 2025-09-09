@@ -69,7 +69,7 @@ The workflow is split into **three main steps**, each handling one stage of the 
 
    - Reads subjects from a CSV.  
    - Cleans the data (removes `FW:`, `RE:`, dates, IDs, codes).  
-   - Writes the cleaned datainto a local SQLite database. 
+   - Writes the cleaned data into a local SQLite database. 
 
 > I used SQLite here only for convenience and easy demo portability.The project is not limited to SQLite,and it can connect to any relational or cloud database (PostgreSQL, Azure SQL, AWS RDS, etc.)
 
