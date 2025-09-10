@@ -4,6 +4,8 @@
 
 ![image](./images/image.png)
 
+---
+
 ## Problem
 
 I had to classify a lot of emails from different accounts, and doing it by hand took enormous time and mental bandwidth.
@@ -22,6 +24,8 @@ This would let me later analyze trends without wasting hours labeling manually.
 - Content may hold sensitive information I don’t want to expose.  
 - Subjects are concise but usually carry enough signal in this case.  
 - Faster training and easier preprocessing.
+
+---
 
 ## Solution
 
@@ -44,6 +48,8 @@ For the classifier, I support two options:
   - Good baseline for comparison.  
 
 In practice, Random Forest has been my go-to for stability, while Logistic Regression serves as a simpler, faster alternative.
+
+---
 
 ## Workflow
 
@@ -95,7 +101,7 @@ The workflow is split into **three main steps**, each handling one stage of the 
 CSV → ETL Pipeline → SQLite → Training → Save Model + Vectorizer → OCR/Input → Predict
 ```
 
-
+---
 
 ## Project Layout
 
@@ -118,6 +124,8 @@ CSV → ETL Pipeline → SQLite → Training → Save Model + Vectorizer → OCR
 ├── requirements.txt
 └── .gitignore
 ```
+
+---
 
 ## How To Run It
 
@@ -159,6 +167,8 @@ region = (1346, 140, 280, 26)
 subject_text, main, sub = ocr_predict(region, vec, model, debug=True)
 ```
 
+---
+
 ## Example Output
 
 ```
@@ -166,6 +176,8 @@ Model Type: rf
 OCR Subject: Annual Budget Meeting Rescheduled
 Predicted → Main: Administration | Sub: Budget
 ```
+
+---
 
 ## Next Steps / Future Improvements  
 
